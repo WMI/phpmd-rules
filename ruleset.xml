@@ -1,23 +1,30 @@
-
 <?xml version='1.0' encoding="UTF-8"?>
 <ruleset name="WMI Magento PHPMD rule set" xmlns="http://pmd.sf.net/ruleset/1.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
          xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
-    <description>Magento Code Check Rules</description>
+    <description>WMI Magento Code Check Rules</description>
 
     <!-- Code Size Rules -->
+    
+    <!-- Code Complexity limitation -->
     <rule ref="rulesets/codesize.xml/CyclomaticComplexity" />
     <rule ref="rulesets/codesize.xml/NPathComplexity" />
+    <!-- Ensure the methods aren't too long -->
     <rule ref="rulesets/codesize.xml/ExcessiveMethodLength" />
+    <!-- Ensure a function doesn't have too many parameters -->
     <rule ref="rulesets/codesize.xml/ExcessiveParameterList" />
+    <!-- Ensure a class doesn't have too many items in the public scope -->
     <rule ref="rulesets/codesize.xml/ExcessivePublicCount" />
+    <!-- Ensure a class doesn't have too many class vars -->
     <rule ref="rulesets/codesize.xml/TooManyFields" />
+    <!-- Ensure a class doesn't have more than 50 methods -->
     <rule ref="rulesets/codesize.xml/TooManyMethods">
         <properties>
             <property name="maxmethods" value="50" />
         </properties>
     </rule>
+    <!-- Ensure a class isn't too complex as a whole, with interlinked methods -->
     <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
         <properties>
             <property name="maximum" value="100" />
@@ -25,16 +32,37 @@
     </rule>
 
     <!-- Unused code rules -->
+    <!-- Checks for unused variables, parameters, private methods and fields -->
     <rule ref="rulesets/unusedcode.xml" />
 
     <!-- Code design rules -->
+    <!-- Check for exit(), eval(), goto, excessive inheritance and dependance -->
     <rule ref="rulesets/design.xml" />
 
     <!-- Naming Rules -->
+    <!-- Check that variables have decent names -->
     <rule ref="rulesets/naming.xml/ShortVariable" />
-    <rule ref="rulesets/naming.xml/LongVariable" />
+    <!-- Check that variables aren't too long -->
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" value="30" />
+        </properties>
+    </rule>
+    <!-- Check that methods have descriptive names -->
     <rule ref="rulesets/naming.xml/ShortMethodName" />
+    <!-- Ensure (again) that the constructor is __construct -->
     <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass" />
+    <!-- Ensure constants are called "CONSTANT_NAME" -->
     <rule ref="rulesets/naming.xml/ConstantNamingConventions" />
+    <!-- Ensure unparametered boolean return methods are labelled as is___() rather than get____() -->
     <rule ref="rulesets/naming.xml/BooleanGetMethodName" />
+    
+    <!-- Controversial Rules -->
+    <!-- Ensure that methods, fields, parameters, and variables use camelcase -->
+    <rule ref="rulesets/controversial.xml">
+        <!-- I'm undecided about this one, we should use the request and response objects, but we'll see... -->
+        <exclude name="Superglobals" />
+        <!-- Skip classes because Zend_Class_Naming_Convention breaks this -->
+        <exclude name="CamelCaseClassName" />
+    </rule>
 </ruleset>
