@@ -59,10 +59,11 @@
     
     <!-- Controversial Rules -->
     <!-- Ensure that methods, fields, parameters, and variables use camelcase -->
-    <rule ref="rulesets/controversial.xml">
+    <!-- Commented out because it doesn't recognise methods and parameters matched with underscore prefixes -->
+    <!--rule ref="rulesets/controversial.xml" -->
         <!-- I'm undecided about this one, we should use the request and response objects, but we'll see... -->
-        <exclude name="Superglobals" />
+        <!--exclude name="Superglobals" /-->
         <!-- Skip classes because Zend_Class_Naming_Convention breaks this -->
-        <exclude name="CamelCaseClassName" />
-    </rule>
+        <!--exclude name="CamelCaseClassName" /-->
+    <!--/rule-->
 </ruleset>
